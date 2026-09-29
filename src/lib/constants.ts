@@ -20,6 +20,10 @@ export const PONS_DEFAULT_LAUNCH_CONFIG_ID = Number(
   process.env.NEXT_PUBLIC_PONS_LAUNCH_CONFIG_ID || "0"
 );
 
+// CoinGecko (optional market charts)
+export const COINGECKO_API_URL = "https://api.coingecko.com/api/v3";
+export const COINGECKO_API_KEY = process.env.NEXT_PUBLIC_COINGECKO_API_KEY;
+
 // Legacy aliases kept so old imports still resolve during migration
 export const BASE_CHAIN_ID = ROBINHOOD_CHAIN_ID;
 export const BASE_RPC_URL = ROBINHOOD_RPC_URL;

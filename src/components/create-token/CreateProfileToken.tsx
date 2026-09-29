@@ -12,7 +12,7 @@ import {
   useWalletClient,
   useWriteContract,
 } from "wagmi";
-import { waitForTransactionReceipt, decodeEventLog } from "viem";
+import { decodeEventLog, zeroAddress } from "viem";
 import { Rocket, Search, Loader2, Wallet } from "lucide-react";
 import { toast } from "sonner";
 import {
@@ -21,7 +21,6 @@ import {
   ROBINHOOD_CHAIN_ID,
 } from "~/lib/constants";
 import { PONS_V2_FACTORY_ABI, normalizeHandle, randomSalt } from "~/lib/pons";
-import { zeroAddress } from "viem";
 
 interface XProfile {
   username: string;
@@ -153,7 +152,7 @@ export default function CreateProfileToken({ onTokenCreated }: CreateProfileToke
       });
 
       toast.loading("Waiting for confirmation…", { id: loadingId });
-      const receipt = await waitForTransactionReceipt(publicClient, { hash });
+      const receipt = await publicClient.waitForTransactionReceipt({ hash });
 
       let tokenAddress: `0x${string}` | undefined;
       let curveAddress: `0x${string}` | undefined;

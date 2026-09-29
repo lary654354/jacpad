@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  color: hsl(var(--foreground));
+  font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: #000;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #1a1a1a transparent;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 4%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 4%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 110 100% 48%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 64%;
+    --accent: 110 100% 48%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 62% 40%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14%;
+    --input: 0 0% 14%;
+    --ring: 110 100% 48%;
+    --radius: 0.75rem;
+    --jac-green: #39ff14;
+  }
+
+  .dark {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 4%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 4%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 110 100% 48%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 64%;
+    --accent: 110 100% 48%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 62% 40%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14%;
+    --input: 0 0% 14%;
+    --ring: 110 100% 48%;
+  }
+}
+
+@layer components {
+  .jac-panel {
+    @apply rounded-2xl border border-zinc-900 bg-zinc-950/80 shadow-[0_0_40px_rgba(57,255,20,0.04)];
+  }
+}

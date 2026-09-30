@@ -1,4 +1,4 @@
-/** Legacy Clanker client. Removed in Jacpad (Pons v2). */
+/** Legacy Clanker client. Removed in Jackpad (Pons v2). */
 export async function initializeWithWallet(_walletClient?: unknown) {
   throw new Error("Clanker SDK removed. Use Pons v2 on Robinhood Chain.");
 }

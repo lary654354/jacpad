@@ -23,7 +23,7 @@ export async function ensureCoreSchema() {
     END;
   END$$;`);
 
-  // Users: wallet-first (Jacpad). Keep fid nullable for legacy rows.
+  // Users: wallet-first (Jackpad). Keep fid nullable for legacy rows.
   await dbPool.query(`CREATE TABLE IF NOT EXISTS users (
     id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     fid bigint UNIQUE,

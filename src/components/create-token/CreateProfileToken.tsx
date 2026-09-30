@@ -121,7 +121,7 @@ export default function CreateProfileToken({ onTokenCreated }: CreateProfileToke
       const symbol = profile.username.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 8) || "JAC";
       const description =
         profile.bio?.trim() ||
-        `Official Jacpad token for @${profile.username} on Robinhood Chain.`;
+        `Official Jackpad token for @${profile.username} on Robinhood Chain.`;
 
       const params = {
         name: profile.name.slice(0, 64),

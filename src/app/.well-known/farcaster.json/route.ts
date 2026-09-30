@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
 
-/** Farcaster miniapp manifest removed for Jacpad. */
+/** Farcaster miniapp manifest removed for Jackpad. */
 export async function GET() {
   return NextResponse.json(
-    { error: "Jacpad is a Robinhood Chain web app, not a Farcaster miniapp." },
+    { error: "Jackpad is a Robinhood Chain web app, not a Farcaster miniapp." },
     { status: 410 }
   );
 }

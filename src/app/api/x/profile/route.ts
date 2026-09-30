@@ -4,7 +4,7 @@ import { normalizeHandle } from "~/lib/pons";
 export const dynamic = "force-dynamic";
 
 const FXTWITTER_UA =
-  "Jacpad/1.0 (+https://jacpad.app; profile lookup)";
+  "Jackpad/1.0 (+https://jackpad.app; profile lookup)";
 
 function upgradeAvatar(url: string): string {
   if (!url) return "";

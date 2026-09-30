@@ -54,7 +54,7 @@ export default function UserProfile() {
       <div className="jac-panel mx-auto max-w-md p-8 text-center space-y-3">
         <Wallet className="mx-auto h-10 w-10 text-jac-green" />
         <h2 className="text-xl font-semibold">Connect wallet</h2>
-        <p className="text-sm text-zinc-400">Your launched Jacpad tokens show up here.</p>
+        <p className="text-sm text-zinc-400">Your launched Jackpad tokens show up here.</p>
       </div>
     );
   }

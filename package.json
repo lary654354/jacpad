@@ -1,5 +1,5 @@
 {
-  "name": "jacpad",
+  "name": "jackpad",
   "packageManager": "pnpm@10.9.0",
   "version": "0.2.0",
   "private": true,

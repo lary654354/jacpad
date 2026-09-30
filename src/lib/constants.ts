@@ -1,7 +1,7 @@
-export const PROJECT_TITLE = "Jacpad";
+export const PROJECT_TITLE = "Jackpad";
 export const PROJECT_DESCRIPTION =
   "Launch X profile tokens on Robinhood Chain with Pons v2";
-export const PROJECT_CREATOR = "Jacpad";
+export const PROJECT_CREATOR = "Jackpad";
 export const PROJECT_AVATAR_URL = "/logo.png";
 
 // Robinhood Chain mainnet

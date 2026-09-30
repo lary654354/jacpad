@@ -7,7 +7,7 @@ import TokenMarketOverview from "~/components/token-market/TokenMarketOverview";
 import TokenDetail from "~/components/token-detail/TokenDetail";
 import CreateProfileToken from "~/components/create-token/CreateProfileToken";
 import UserProfile from "~/components/user-profile/UserProfile";
-import AboutJacpad from "~/components/about/AboutJacpad";
+import AboutJackpad from "~/components/about/AboutJackpad";
 import { Compass, Home, Rocket, User, Wallet, LogOut } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "~/components/ui/dialog";
 import { ErrorBoundary } from "~/components/ErrorBoundary";
@@ -54,9 +54,9 @@ export default function App() {
             onClick={() => setPage("about")}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo.png" alt="Jacpad" className="h-8 w-8 object-contain" />
+            <img src="/logo.png" alt="Jackpad" className="h-8 w-8 object-contain" />
             <span className="text-lg font-semibold tracking-wide text-jac-green drop-shadow-[0_0_12px_rgba(57,255,20,0.35)]">
-              Jacpad
+              Jackpad
             </span>
           </button>
 
@@ -96,7 +96,7 @@ export default function App() {
       <main className="mx-auto max-w-5xl px-4 py-8">
         <ErrorBoundary>
           {page === "about" && (
-            <AboutJacpad
+            <AboutJackpad
               onExplore={() => setPage("explore")}
               onLaunch={() => setPage("create")}
             />

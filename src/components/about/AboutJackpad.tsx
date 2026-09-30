@@ -4,23 +4,23 @@ import { Compass, Rocket, Wallet } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import { PONS_LAUNCHPAD_URL, ROBINHOOD_CHAIN_ID } from "~/lib/constants";
 
-interface AboutJacpadProps {
+interface AboutJackpadProps {
   onExplore: () => void;
   onLaunch: () => void;
 }
 
-export default function AboutJacpad({ onExplore, onLaunch }: AboutJacpadProps) {
+export default function AboutJackpad({ onExplore, onLaunch }: AboutJackpadProps) {
   return (
     <div className="space-y-14 pb-8">
       <section className="text-center space-y-5 pt-6">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/logo.png"
-          alt="Jacpad"
+          alt="Jackpad"
           className="mx-auto h-24 w-24 object-contain drop-shadow-[0_0_28px_rgba(57,255,20,0.5)]"
         />
         <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight text-jac-green">
-          Jacpad
+          Jackpad
         </h1>
         <p className="mx-auto max-w-xl text-base sm:text-lg text-zinc-300">
           Turn a public X profile into a token on Robinhood Chain. Name, bio, and avatar become the token, launched through Pons v2 from your wallet.
@@ -48,12 +48,12 @@ export default function AboutJacpad({ onExplore, onLaunch }: AboutJacpadProps) {
         <Step
           n="01"
           title="Type an X handle"
-          body="No Twitter login. Jacpad reads the public profile: display name, bio, and avatar."
+          body="No Twitter login. Jackpad reads the public profile: display name, bio, and avatar."
         />
         <Step
           n="02"
           title="Connect your wallet"
-          body="Injected wallets on Robinhood Chain. You sign the launch. Jacpad never holds your key."
+          body="Injected wallets on Robinhood Chain. You sign the launch. Jackpad never holds your key."
         />
         <Step
           n="03"
@@ -63,9 +63,9 @@ export default function AboutJacpad({ onExplore, onLaunch }: AboutJacpadProps) {
       </section>
 
       <section className="jac-panel p-6 sm:p-8 space-y-4">
-        <h2 className="text-xl font-semibold text-white">What Jacpad is</h2>
+        <h2 className="text-xl font-semibold text-white">What Jackpad is</h2>
         <p className="text-sm sm:text-base text-zinc-400 leading-relaxed">
-          Jacpad is a launchpad for identity tokens. Each token represents a public X account: the handle is the social link, the avatar is the logo, and the bio is the description. Trading happens on Pons after launch. This site is the directory. Explore what has been launched, or start one yourself.
+          Jackpad is a launchpad for identity tokens. Each token represents a public X account: the handle is the social link, the avatar is the logo, and the bio is the description. Trading happens on Pons after launch. This site is the directory. Explore what has been launched, or start one yourself.
         </p>
         <ul className="grid gap-2 text-sm text-zinc-300 sm:grid-cols-2">
           <li className="rounded-lg border border-zinc-900 bg-black/40 px-3 py-2">Network: Robinhood Chain ({ROBINHOOD_CHAIN_ID})</li>

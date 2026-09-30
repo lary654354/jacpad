@@ -90,7 +90,7 @@ export async function POST(request: NextRequest) {
       );
       if (!same.rows[0]) {
         return NextResponse.json(
-          { error: "Wallet already has an active Jacpad token" },
+          { error: "Wallet already has an active Jackpad token" },
           { status: 409 }
         );
       }

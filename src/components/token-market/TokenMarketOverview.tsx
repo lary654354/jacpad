@@ -65,7 +65,7 @@ export default function TokenMarketOverview({ onTokenSelect }: Props) {
       <div className="space-y-1">
         <h1 className="text-2xl font-semibold tracking-tight text-white">Explore</h1>
         <p className="text-sm text-zinc-400">
-          X profile tokens launched on Jacpad.
+          X profile tokens launched on Jackpad.
         </p>
       </div>
 

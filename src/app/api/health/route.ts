@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 
 export async function GET() {
   const checks: Record<string, any> = {
-    app: "jacpad",
+    app: "jackpad",
     chainId: ROBINHOOD_CHAIN_ID,
     ponsFactory: PONS_V2_FACTORY,
     timestamp: new Date().toISOString(),

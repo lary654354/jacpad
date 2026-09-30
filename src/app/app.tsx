@@ -99,6 +99,10 @@ export default function App() {
             <AboutJackpad
               onExplore={() => setPage("explore")}
               onLaunch={() => setPage("create")}
+              onTokenSelect={(id) => {
+                setSelectedTokenId(id);
+                setDetailOpen(true);
+              }}
             />
           )}
           {page === "explore" && (

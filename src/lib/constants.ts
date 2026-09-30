@@ -3,6 +3,8 @@ export const PROJECT_DESCRIPTION =
   "Launch X profile tokens on Robinhood Chain with Pons v2";
 export const PROJECT_CREATOR = "Jackpad";
 export const PROJECT_AVATAR_URL = "/logo.png";
+export const OFFICIAL_TOKEN_CA =
+  "0x9384b92266d55bab2c7b3c8558eff3803b9a86c4" as const;
 
 // Robinhood Chain mainnet
 export const ROBINHOOD_CHAIN_ID = 4663;

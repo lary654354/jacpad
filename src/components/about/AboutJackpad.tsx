@@ -3,13 +3,15 @@
 import { Compass, Rocket, Wallet } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import { PONS_LAUNCHPAD_URL, ROBINHOOD_CHAIN_ID } from "~/lib/constants";
+import OfficialToken from "~/components/official-token/OfficialToken";
 
 interface AboutJackpadProps {
   onExplore: () => void;
   onLaunch: () => void;
+  onTokenSelect?: (address: string) => void;
 }
 
-export default function AboutJackpad({ onExplore, onLaunch }: AboutJackpadProps) {
+export default function AboutJackpad({ onExplore, onLaunch, onTokenSelect }: AboutJackpadProps) {
   return (
     <div className="space-y-14 pb-8">
       <section className="text-center space-y-5 pt-6">
@@ -43,6 +45,8 @@ export default function AboutJackpad({ onExplore, onLaunch }: AboutJackpadProps)
           </Button>
         </div>
       </section>
+
+      <OfficialToken onOpen={onTokenSelect} />
 
       <section className="grid gap-4 sm:grid-cols-3">
         <Step

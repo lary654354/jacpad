@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { ProfileToken } from "~/lib/token-types";
 import { Search, TrendingDown, TrendingUp } from "lucide-react";
 import { Input } from "~/components/ui/input";
+import { OFFICIAL_TOKEN_CA } from "~/lib/constants";
 
 interface Props {
   onTokenSelect?: (id: string) => void;
@@ -11,6 +12,13 @@ interface Props {
 
 export default function TokenMarketOverview({ onTokenSelect }: Props) {
   const [tokens, setTokens] = useState<ProfileToken[]>([]);
+  const [officialMarket, setOfficialMarket] = useState({
+    name: "Jackpad",
+    symbol: "JACK",
+    price: 0,
+    marketCap: 0,
+    priceChangePercentage24h: 0,
+  });
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
 
@@ -23,6 +31,19 @@ export default function TokenMarketOverview({ onTokenSelect }: Props) {
         const data = response.ok ? await response.json() : { tokens: [] };
         const apiTokens: ProfileToken[] = Array.isArray(data) ? data : data?.tokens ?? [];
         if (!cancelled) setTokens(apiTokens);
+        const marketRes = await fetch(`/api/token/market?address=${OFFICIAL_TOKEN_CA}`);
+        if (marketRes.ok) {
+          const market = await marketRes.json();
+          if (!cancelled && market?.success) {
+            setOfficialMarket({
+              name: market.data?.baseToken?.name || "Jackpad",
+              symbol: market.data?.baseToken?.symbol || "JACK",
+              price: Number(market.data?.price) || 0,
+              marketCap: Number(market.data?.marketCap) || 0,
+              priceChangePercentage24h: Number(market.data?.priceChangePercentage24h) || 0,
+            });
+          }
+        }
       } catch {
         if (!cancelled) setTokens([]);
       } finally {
@@ -50,6 +71,41 @@ export default function TokenMarketOverview({ onTokenSelect }: Props) {
       (a, b) => (b.priceChangePercentage24h || 0) - (a.priceChangePercentage24h || 0)
     );
   }, [tokens, search]);
+
+  const officialRow: ProfileToken = {
+    id: "official",
+    address: OFFICIAL_TOKEN_CA,
+    name: officialMarket.name,
+    symbol: officialMarket.symbol,
+    description: "Official Jackpad token",
+    image: "/logo.png",
+    creator: {
+      fid: 0,
+      username: "jackpad",
+      displayName: "Jackpad",
+      pfpUrl: "/logo.png",
+    },
+    maxSupply: 0,
+    creatorFeePercentage: 0,
+    createdAt: "",
+    marketCap: officialMarket.marketCap,
+    volume24h: 0,
+    price: officialMarket.price,
+    priceChange24h: 0,
+    priceChangePercentage24h: officialMarket.priceChangePercentage24h,
+    holders: 0,
+    isVerified: true,
+  };
+
+  const rows = [
+    ...(search.trim() &&
+    !"jackpad".includes(search.trim().toLowerCase()) &&
+    !officialMarket.symbol.toLowerCase().includes(search.trim().toLowerCase()) &&
+    !OFFICIAL_TOKEN_CA.includes(search.trim().toLowerCase())
+      ? []
+      : [officialRow]),
+    ...filtered.filter((t) => t.address?.toLowerCase() !== OFFICIAL_TOKEN_CA.toLowerCase()),
+  ];
 
   if (loading) {
     return (
@@ -79,7 +135,7 @@ export default function TokenMarketOverview({ onTokenSelect }: Props) {
         />
       </div>
 
-      {filtered.length === 0 ? (
+      {rows.length === 0 ? (
         <div className="jac-panel p-10 text-center text-zinc-500 text-sm">
           No tokens yet. Be the first to launch from an X handle.
         </div>
@@ -91,7 +147,7 @@ export default function TokenMarketOverview({ onTokenSelect }: Props) {
             <div className="col-span-3 text-right">MC</div>
             <div className="col-span-2 text-right">24h</div>
           </div>
-          {filtered.map((token, i) => {
+          {rows.map((token, i) => {
             const change = Number(token.priceChangePercentage24h) || 0;
             const up = change >= 0;
             const img = token.image || token.creator?.pfpUrl || "/logo.png";
@@ -108,7 +164,12 @@ export default function TokenMarketOverview({ onTokenSelect }: Props) {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={img} alt="" className="h-8 w-8 rounded-full object-cover ring-1 ring-zinc-800" />
                   <div className="min-w-0">
-                    <p className="truncate font-medium text-white">{token.name}</p>
+                    <p className="truncate font-medium text-white">
+                      {token.name}
+                      {token.id === "official" ? (
+                        <span className="ml-2 text-[10px] uppercase tracking-wide text-jac-green">Official</span>
+                      ) : null}
+                    </p>
                     <p className="truncate text-xs text-jac-green font-mono">{token.symbol}</p>
                   </div>
                 </div>

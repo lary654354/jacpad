@@ -1,11 +1,41 @@
 import { NextRequest, NextResponse } from "next/server";
 import { dbPool } from "~/lib/db";
+import { OFFICIAL_TOKEN_CA } from "~/lib/constants";
+
+function officialToken() {
+  return {
+    id: "official",
+    address: OFFICIAL_TOKEN_CA,
+    name: "Jackpad",
+    symbol: "JACK",
+    description: "Official Jackpad token on Robinhood Chain.",
+    image: "/logo.png",
+    creator: {
+      fid: null,
+      username: "jackpad",
+      displayName: "Jackpad",
+      pfpUrl: "/logo.png",
+    },
+    maxSupply: 0,
+    creatorFeePercentage: 0,
+    createdAt: null,
+    price: 0,
+    marketCap: 0,
+    volume24h: 0,
+    priceChange24h: 0,
+    priceChangePercentage24h: 0,
+    holders: 0,
+    isVerified: true,
+  };
+}
+
+function isOfficialAddress(address: string) {
+  return address.toLowerCase() === OFFICIAL_TOKEN_CA.toLowerCase();
+}
 
 export async function GET(request: NextRequest) {
+  const address = new URL(request.url).searchParams.get("address");
   try {
-    const { searchParams } = new URL(request.url);
-    const address = searchParams.get("address");
-
     if (!address) {
       return NextResponse.json(
         { error: "Missing address parameter" },
@@ -17,15 +47,9 @@ export async function GET(request: NextRequest) {
 
     // Check if database is available
     if (!dbPool) {
-      console.log("Database not available - dbPool is null");
-      console.log("Available env vars:", {
-        DATABASE_URL: !!process.env.DATABASE_URL,
-        RAILWAY_DATABASE_URL: !!process.env.RAILWAY_DATABASE_URL,
-        DIRECT_URL: !!process.env.DIRECT_URL,
-        NEXT_PUBLIC_DATABASE_URL: !!process.env.NEXT_PUBLIC_DATABASE_URL,
-        FALLBACK_DATABASE_URL: !!process.env.FALLBACK_DATABASE_URL,
-      });
-      
+      if (isOfficialAddress(address)) {
+        return NextResponse.json(officialToken());
+      }
       return NextResponse.json(
         { error: "Database not available" },
         { status: 503 }
@@ -77,12 +101,15 @@ export async function GET(request: NextRequest) {
         FROM profile_tokens pt
         JOIN users u ON pt.creator_id = u.id
         LEFT JOIN token_market_data tmd ON pt.id = tmd.token_id
-        WHERE pt.address = $1 AND pt.is_active = true
+        WHERE lower(pt.address) = lower($1) AND pt.is_active = true
       `;
 
     const result = await dbPool.query(query, [address]);
 
     if (result.rows.length === 0) {
+      if (isOfficialAddress(address)) {
+        return NextResponse.json(officialToken());
+      }
       return NextResponse.json(
         { error: "Token not found" },
         { status: 404 }
@@ -122,7 +149,9 @@ export async function GET(request: NextRequest) {
 
   } catch (error) {
     console.error("Get token info error:", error);
-    
+    if (address && isOfficialAddress(address)) {
+      return NextResponse.json(officialToken());
+    }
     return NextResponse.json(
       { 
         error: error instanceof Error ? error.message : "Unknown error occurred"

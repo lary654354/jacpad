@@ -10,7 +10,7 @@ import { ProfileToken, TokenChartData, TokenHolder } from "~/lib/token-types";
 import { TrendingUp, TrendingDown, Star, Users, Activity, ExternalLink, RefreshCw } from "lucide-react";
 import { coinGeckoAPI } from "~/lib/coingecko";
 import { toast } from "sonner";
-import { PONS_LAUNCHPAD_URL } from "~/lib/constants";
+import { PONS_LAUNCHPAD_URL, OFFICIAL_TOKEN_CA } from "~/lib/constants";
 
 // No mock chart data in production
 
@@ -269,6 +269,37 @@ export default function TokenDetail({
             setChartData([]);
             setDataSource("none");
             setHasMarketData(false);
+          }
+        } else if (tokenId.toLowerCase() === OFFICIAL_TOKEN_CA.toLowerCase()) {
+          const fallback = {
+            id: "official",
+            address: OFFICIAL_TOKEN_CA,
+            name: marketData?.data?.baseToken?.name || "Jackpad",
+            symbol: marketData?.data?.baseToken?.symbol || "JACK",
+            description: "Official Jackpad token on Robinhood Chain.",
+            image: "/logo.png",
+            creator: {
+              fid: 0,
+              username: "jackpad",
+              displayName: "Jackpad",
+              pfpUrl: "/logo.png",
+            },
+            maxSupply: 0,
+            creatorFeePercentage: 0,
+            createdAt: "",
+            price: Number(marketData?.data?.price) || 0,
+            marketCap: Number(marketData?.data?.marketCap) || 0,
+            volume24h: Number(marketData?.data?.volume24h) || 0,
+            priceChange24h: Number(marketData?.data?.priceChange24h) || 0,
+            priceChangePercentage24h: Number(marketData?.data?.priceChangePercentage24h) || 0,
+            holders: holdersData?.totalHolders || holdersData?.holders?.length || 0,
+            isVerified: true,
+          };
+          setToken(fallback);
+          if (marketData?.candles) {
+            setChartData(marketData.candles);
+            setDataSource(marketData.source || "market");
+            setHasMarketData(true);
           }
         } else {
           setToken(null);

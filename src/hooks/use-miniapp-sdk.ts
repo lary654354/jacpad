@@ -1,6 +1,6 @@
 "use client";
 
-/** MiniApp SDK removed — Jacpad is wallet-only. */
+/** MiniApp SDK removed. Jacpad is wallet-only. */
 export function useMiniAppSdk() {
   return {
     sdk: null as any,

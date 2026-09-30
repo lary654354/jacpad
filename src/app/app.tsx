@@ -7,13 +7,14 @@ import TokenMarketOverview from "~/components/token-market/TokenMarketOverview";
 import TokenDetail from "~/components/token-detail/TokenDetail";
 import CreateProfileToken from "~/components/create-token/CreateProfileToken";
 import UserProfile from "~/components/user-profile/UserProfile";
-import { BarChart3, Rocket, User, Wallet, LogOut } from "lucide-react";
+import AboutJacpad from "~/components/about/AboutJacpad";
+import { Compass, Home, Rocket, User, Wallet, LogOut } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "~/components/ui/dialog";
 import { ErrorBoundary } from "~/components/ErrorBoundary";
 import { ROBINHOOD_CHAIN_ID } from "~/lib/constants";
 import { Button } from "~/components/ui/button";
 
-type Page = "market" | "create" | "profile";
+type Page = "about" | "explore" | "create" | "profile";
 
 export default function App() {
   const { isConnected, address, chainId } = useAccount();
@@ -21,7 +22,7 @@ export default function App() {
   const { disconnect } = useDisconnect();
   const { switchChainAsync } = useSwitchChain();
 
-  const [page, setPage] = useState<Page>("market");
+  const [page, setPage] = useState<Page>("about");
   const [selectedTokenId, setSelectedTokenId] = useState<string | null>(null);
   const [detailOpen, setDetailOpen] = useState(false);
 
@@ -50,7 +51,7 @@ export default function App() {
           <button
             type="button"
             className="flex items-center gap-2"
-            onClick={() => setPage("market")}
+            onClick={() => setPage("about")}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/logo.png" alt="Jacpad" className="h-8 w-8 object-contain" />
@@ -60,7 +61,8 @@ export default function App() {
           </button>
 
           <nav className="flex items-center gap-1 sm:gap-2">
-            <NavBtn active={page === "market"} onClick={() => setPage("market")} icon={<BarChart3 className="h-4 w-4" />} label="Market" />
+            <NavBtn active={page === "about"} onClick={() => setPage("about")} icon={<Home className="h-4 w-4" />} label="Home" />
+            <NavBtn active={page === "explore"} onClick={() => setPage("explore")} icon={<Compass className="h-4 w-4" />} label="Explore" />
             <NavBtn active={page === "create"} onClick={() => setPage("create")} icon={<Rocket className="h-4 w-4" />} label="Launch" />
             <NavBtn active={page === "profile"} onClick={() => setPage("profile")} icon={<User className="h-4 w-4" />} label="Profile" />
           </nav>
@@ -93,7 +95,13 @@ export default function App() {
 
       <main className="mx-auto max-w-5xl px-4 py-8">
         <ErrorBoundary>
-          {page === "market" && (
+          {page === "about" && (
+            <AboutJacpad
+              onExplore={() => setPage("explore")}
+              onLaunch={() => setPage("create")}
+            />
+          )}
+          {page === "explore" && (
             <TokenMarketOverview
               onTokenSelect={(id) => {
                 setSelectedTokenId(id);

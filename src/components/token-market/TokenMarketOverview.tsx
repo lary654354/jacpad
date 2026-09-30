@@ -55,21 +55,17 @@ export default function TokenMarketOverview({ onTokenSelect }: Props) {
     return (
       <div className="flex flex-col items-center justify-center py-24 gap-3">
         <div className="h-10 w-10 animate-spin rounded-full border-2 border-jac-green border-t-transparent" />
-        <p className="text-sm text-zinc-400">Loading market…</p>
+        <p className="text-sm text-zinc-400">Loading tokens…</p>
       </div>
     );
   }
 
   return (
     <div className="space-y-8">
-      <div className="text-center space-y-3">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/logo.png" alt="Jacpad" className="mx-auto h-16 w-16 object-contain drop-shadow-[0_0_20px_rgba(57,255,20,0.45)]" />
-        <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-jac-green">
-          Jacpad
-        </h1>
-        <p className="text-sm text-zinc-400 max-w-md mx-auto">
-          X profile tokens on Robinhood Chain — powered by Pons v2.
+      <div className="space-y-1">
+        <h1 className="text-2xl font-semibold tracking-tight text-white">Explore</h1>
+        <p className="text-sm text-zinc-400">
+          X profile tokens launched on Jacpad.
         </p>
       </div>
 

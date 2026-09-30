@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 
 /**
  * Persist a token that was already launched on-chain via Pons v2 from the user wallet.
- * Does NOT deploy — client calls the factory directly.
+ * Does NOT deploy. Client calls the factory directly.
  */
 export async function POST(request: NextRequest) {
   try {

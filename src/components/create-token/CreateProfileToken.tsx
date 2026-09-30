@@ -220,7 +220,7 @@ export default function CreateProfileToken({ onTokenCreated }: CreateProfileToke
           Launch from X
         </h2>
         <p className="text-sm text-zinc-400">
-          Enter a handle — we pull name, bio, and avatar into your Pons v2 token on Robinhood Chain.
+          Enter a handle. We pull name, bio, and avatar into your Pons v2 token on Robinhood Chain.
         </p>
       </div>
 

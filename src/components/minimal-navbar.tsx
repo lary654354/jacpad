@@ -1,6 +1,6 @@
 "use client";
 
-/** Legacy MiniApp navbar — unused in Jacpad shell. */
+/** Legacy MiniApp navbar. Unused in Jacpad shell. */
 export default function MinimalNavbar() {
   return null;
 }

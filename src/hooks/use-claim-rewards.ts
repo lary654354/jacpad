@@ -2,7 +2,7 @@
 
 import { toast } from "sonner";
 
-/** Clanker LP claim removed — Jacpad uses Pons on Robinhood. */
+/** Clanker LP claim removed. Jacpad uses Pons on Robinhood. */
 export function useClaimRewards() {
   return {
     isPending: false,
